@@ -6,12 +6,13 @@ import { updateUser } from '../features/auth/authSlice.jsx';
 const EditNameForm = ({ setIsEditing }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  const [username, setUsername] = useState(user.userName || ''); // Si username est null, initialiser avec une chaîne vide
+  const [username, setUsername] = useState(user.userName || '');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateUser({ userName: username })); // Mettre à jour le username
-    setIsEditing(false);
+    dispatch(updateUser({ userName: username })).then(() => {
+      setIsEditing(false);
+    });
   };
 
   return (
